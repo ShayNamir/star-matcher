@@ -47,11 +47,6 @@ The project combines image processing, geometric algorithms, and an interactive 
 
 ---
 
-## Example Output
-![Example of star matching](readmefiles/example-math1.png)
-
----
-
 ## Credits
 The project is based on ideas from the presentation: [Feature-based Star Identification](https://sites.astro.caltech.edu/~moncelsi/FTS_talk.pdf)
 
