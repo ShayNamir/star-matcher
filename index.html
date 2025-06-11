@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מזהה כוכבים</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --text-color: #ecf0f1;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .image-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed var(--accent-color);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-input:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        canvas {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .value-display {
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .authors {
+            margin-bottom: 1.5rem;
+            padding: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .authors .course {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .authors .names {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="authors">
+                <p class="course">מבוא להנדסת חלל</p>
+                <p class="names">שי נמיר ואילון אשואל</p>
+            </div>
+            <h1>מזהה כוכבים</h1>
+            <p>העלה שתי תמונות של שמי הלילה כדי לזהות ולהתאים כוכבים</p>
+        </header>
+
+        <main class="main-content">
+            <section class="image-section">
+                <input id="file1" type="file" accept="image/*" class="file-input">
+                <canvas id="canvas1"></canvas>
+            </section>
+
+            <section class="image-section">
+                <input id="file2" type="file" accept="image/*" class="file-input">
+                <canvas id="canvas2"></canvas>
+            </section>
+        </main>
+
+        <section class="controls">
+            <div class="control-group">
+                <label for="threshold">סף בהירות:</label>
+                <input id="threshold" type="range" min="60" max="255" value="75" class="slider">
+                <span id="thresholdValue" class="value-display">75</span>
+            </div>
+
+            <div class="control-group">
+                <label for="gridSize">גודל רשת:</label>
+                <input id="gridSize" type="range" min="1" max="50" value="30" class="slider">
+                <span id="gridSizeValue" class="value-display">30</span>
+            </div>
+
+            <div class="control-group">
+                <label for="tolerance">סובלנות:</label>
+                <input id="tolerance" type="range" min="0" max="100" value="10" class="slider">
+                <span id="toleranceValue" class="value-display">10</span>
+            </div>
+
+            <div class="buttons">
+                <button id="recalc" class="btn btn-secondary">חשב מחדש</button>
+                <button id="match" class="btn btn-primary">התאם כוכבים</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="main.js" type="module"></script>
+</body>
+</html>
