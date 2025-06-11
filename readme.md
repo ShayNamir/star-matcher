@@ -1,47 +1,60 @@
-# Summary 
-In this assignment, we will develop an algorithm for star classification (identification). Given an image of stars.
+# Star Matcher - Star Detection and Matching in Night Sky Images
 
-You can interact with a demo website here : [Link](https://daniel-naz.github.io)
+**Shay Namir & Eilon Ashuel**  
+Course: Introduction to Space Engineering
 
-(Use high gridsize for pictures with a lot of stars and low gridsize for a small amout of stars)
+---
 
-## Part 1 - The Algorithm
+## Project Description
 
-The algorithm is based on the following presentation : [Link](https://sites.astro.caltech.edu/~moncelsi/FTS_talk.pdf).
+In this project, we developed a system for detecting and matching stars between two images of the night sky. The system allows users to upload two images, detect stars in each, and find matches between groups of stars based on unique geometric features.
 
-The algorithm follows these steps:
-1. 'Split' the images into a grid.
-2. Take the 'n' brightest stars in each cell of the grid.
-3. Pick 4 random stars and construct a geometric feature with 4 sides (quadrilateral).
+The project combines image processing, geometric algorithms, and an interactive web interface.
 
-   The 2 most distant stars are labelled A, B and are used to establish a local coordinate frame.
+---
 
-   The other stars are labelled C, D and they are used to compare 2 shapes.
-4. Build 'n' geometric features in each cell.
-5. Compare the features from the 2 images.
+## How Does It Work?
+1. **Image Upload:** The user uploads two images of the starry night sky.
+2. **Star Detection:** The algorithm detects all stars in each image using image processing (brightness threshold, center of mass calculation).
+3. **Grid Division:** The image is divided into a grid to enable local detection of star groups.
+4. **Geometric Feature Creation:** In each region, groups of 4 stars are selected and a unique geometric "fingerprint" is created (distances, angles).
+5. **Group Matching:** The algorithm compares the features from the first image to those in the second image and finds matches.
+6. **Result Display:** The matches are displayed on the images using colored lines.
 
-## Part 2 - Star Identification
+---
 
-We convert the image to grayscale and calculate the radius and brightness of the star.
+## How to Use
+1. Open the `index.html` file in your browser or run a local server (e.g., `python3 -m http.server`).
+2. Upload two images of the night sky.
+3. Adjust the parameters (brightness threshold, grid size, tolerance) as needed.
+4. Click "Recalculate Stars" to detect stars, and "Match Stars" to find matches.
 
-![locating-stars-1](/readmefiles/locating-stars-1.png)
-![locating-stars-2](/readmefiles/locating-stars-2.png)
+---
 
+## Parameter Explanation
+- **Brightness Threshold:** Determines which points in the image are considered stars (higher threshold = fewer stars detected).
+- **Grid Size:** Determines how many regions the image is divided into. A higher value is suitable for images with many stars.
+- **Tolerance:** Determines how "forgiving" the algorithm is when matching shapes (higher value = more matches, but also more false positives).
 
-## Part 3 - Star Matching 
+---
 
-Here we use the algorithm talked about it Part 1, we first split the image into cells and build geometric features.
+## Main Files
+- `index.html` - Web user interface
+- `main.js` - Main control logic
+- `star-detector.js` - Star detection in the image
+- `star-matcher.js` - Geometric feature creation and star group matching
+- `utils.js` - Utility functions
 
-![match1](/readmefiles/match1.png)
+---
 
+## Example Output
+![Example of star matching](readmefiles/example-math1.png)
 
-## Part 4 - Conclusion
+---
 
-The method we used can identify most stars but can also miss some of them depending on the grid size and thresholds. The user
-needs to balace the runtime with the accuracy of the match. 
+## Credits
+The project is based on ideas from the presentation: [Feature-based Star Identification](https://sites.astro.caltech.edu/~moncelsi/FTS_talk.pdf)
 
-![alt text](./readmefiles/-example-math1.png)
-![alt text](./readmefiles/example-math1.png)
+---
 
-![alt text](./readmefiles/-example-math2.png)
-![alt text](./readmefiles/example-math2.png)
+Good luck!
