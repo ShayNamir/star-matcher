@@ -1,5 +1,7 @@
 # Star Matcher - Star Detection and Matching in Night Sky Images
 
+[**Live Demo** – Click here to try the project online!](https://shaynamir.github.io/star-matcher/)
+
 **Shay Namir & Eilon Ashuel**  
 Course: Introduction to Space Engineering
 
