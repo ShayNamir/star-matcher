@@ -26,10 +26,12 @@ The project combines image processing, geometric algorithms, and an interactive 
 ---
 
 ## How to Use
-1. Open the `index.html` file in your browser or run a local server (e.g., `python3 -m http.server`).
+1. Go to the [live demo site](https://shaynamir.github.io/star-matcher/).
 2. Upload two images of the night sky.
 3. Adjust the parameters (brightness threshold, grid size, tolerance) as needed.
 4. Click "Recalculate Stars" to detect stars, and "Match Stars" to find matches.
+
+*There is no need to run anything locally – everything works directly from your browser!*
 
 ---
 
@@ -40,7 +42,7 @@ The project combines image processing, geometric algorithms, and an interactive 
 
 ---
 
-## Main Files
+## Main Files (for developers)
 - `index.html` - Web user interface
 - `main.js` - Main control logic
 - `star-detector.js` - Star detection in the image
